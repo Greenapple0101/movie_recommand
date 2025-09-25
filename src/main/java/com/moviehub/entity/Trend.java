@@ -34,7 +34,7 @@ public class Trend {
     @Column(precision = 10, scale = 2)
     private BigDecimal score;
     
-    @Column(columnDefinition = "JSONB")
+    @Column(columnDefinition = "TEXT")
     private String metadata; // JSON string for additional metadata
     
     @CreatedDate

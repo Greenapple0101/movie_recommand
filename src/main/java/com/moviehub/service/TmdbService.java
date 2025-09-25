@@ -6,6 +6,7 @@ import com.moviehub.entity.Movie;
 import com.moviehub.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class TmdbService {
     
     private final WebClient webClient;
     private final MovieRepository movieRepository;
+    
+    @Autowired
+    public TmdbService(WebClient webClient, MovieRepository movieRepository) {
+        this.webClient = webClient;
+        this.movieRepository = movieRepository;
+    }
     
     @Value("${external.tmdb.api-key}")
     private String apiKey;

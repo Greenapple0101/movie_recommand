@@ -30,13 +30,13 @@ public class UserPreferences {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
-    @Column(name = "genre_preferences", columnDefinition = "JSONB")
+    @Column(name = "genre_preferences", columnDefinition = "TEXT")
     private String genrePreferences; // JSON string for genre preferences
     
-    @Column(name = "mood_preferences", columnDefinition = "JSONB")
+    @Column(name = "mood_preferences", columnDefinition = "TEXT")
     private String moodPreferences; // JSON string for mood preferences
     
-    @Column(name = "rating_patterns", columnDefinition = "JSONB")
+    @Column(name = "rating_patterns", columnDefinition = "TEXT")
     private String ratingPatterns; // JSON string for rating patterns
     
     @CreatedDate
