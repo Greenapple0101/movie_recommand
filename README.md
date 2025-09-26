@@ -452,7 +452,7 @@ REDIS_URL=redis://host:port
 ## 📞 연락처
 
 - **프로젝트 링크**: [https://github.com/Greenapple0101/movie_recommand](https://github.com/Greenapple0101/movie_recommand)
-- **이메일**: your.email@example.com
+- **이메일**: yorange50@gmail.com
 
 ## 🙏 감사의 말
 
