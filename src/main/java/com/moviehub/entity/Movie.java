@@ -59,7 +59,7 @@ public class Movie {
     @Column(precision = 10, scale = 2)
     private BigDecimal popularity;
     
-    @Column(columnDefinition = "JSONB")
+    @Column(columnDefinition = "TEXT")
     private String genres; // JSON string for genres
     
     private Integer runtime;

@@ -112,11 +112,12 @@ public class TrendService {
             var popularResponse = tmdbService.getPopularMovies(1);
             
             if (popularResponse != null && popularResponse.getResults() != null) {
-                // 장르별 인기도 계산
+                // 장르별 인기도 계산 (MovieResult는 genreIds만 있으므로 간단히 처리)
                 var genreCounts = popularResponse.getResults().stream()
-                        .flatMap(movie -> movie.getGenres().stream())
+                        .filter(movie -> movie.getGenreIds() != null)
+                        .flatMap(movie -> movie.getGenreIds().stream())
                         .collect(Collectors.groupingBy(
-                                genre -> genre.getName(),
+                                genreId -> "Genre_" + genreId,
                                 Collectors.counting()
                         ));
                 

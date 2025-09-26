@@ -16,6 +16,35 @@ public class TmdbDto {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class MovieResult {
+        private Integer id;
+        private String title;
+        @JsonProperty("original_title")
+        private String originalTitle;
+        private String overview;
+        @JsonProperty("release_date")
+        private String releaseDate;
+        @JsonProperty("poster_path")
+        private String posterPath;
+        @JsonProperty("backdrop_path")
+        private String backdropPath;
+        @JsonProperty("vote_average")
+        private BigDecimal voteAverage;
+        @JsonProperty("vote_count")
+        private Integer voteCount;
+        private BigDecimal popularity;
+        @JsonProperty("genre_ids")
+        private List<Integer> genreIds;
+        private Boolean adult;
+        @JsonProperty("original_language")
+        private String originalLanguage;
+        private Boolean video;
+    }
+    
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class MovieResponse {
         private Integer id;
         private String title;
@@ -67,7 +96,7 @@ public class TmdbDto {
     @AllArgsConstructor
     public static class SearchResponse {
         private Integer page;
-        private List<MovieResponse> results;
+        private List<MovieResult> results;
         @JsonProperty("total_pages")
         private Integer totalPages;
         @JsonProperty("total_results")
@@ -80,7 +109,7 @@ public class TmdbDto {
     @AllArgsConstructor
     public static class TrendingResponse {
         private Integer page;
-        private List<MovieResponse> results;
+        private List<MovieResult> results;
         @JsonProperty("total_pages")
         private Integer totalPages;
         @JsonProperty("total_results")
@@ -93,7 +122,7 @@ public class TmdbDto {
     @AllArgsConstructor
     public static class PopularResponse {
         private Integer page;
-        private List<MovieResponse> results;
+        private List<MovieResult> results;
         @JsonProperty("total_pages")
         private Integer totalPages;
         @JsonProperty("total_results")
@@ -106,7 +135,7 @@ public class TmdbDto {
     @AllArgsConstructor
     public static class TopRatedResponse {
         private Integer page;
-        private List<MovieResponse> results;
+        private List<MovieResult> results;
         @JsonProperty("total_pages")
         private Integer totalPages;
         @JsonProperty("total_results")

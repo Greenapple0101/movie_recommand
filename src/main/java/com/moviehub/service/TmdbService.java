@@ -27,12 +27,6 @@ public class TmdbService {
     private final WebClient webClient;
     private final MovieRepository movieRepository;
     
-    @Autowired
-    public TmdbService(WebClient webClient, MovieRepository movieRepository) {
-        this.webClient = webClient;
-        this.movieRepository = movieRepository;
-    }
-    
     @Value("${external.tmdb.api-key}")
     private String apiKey;
     
@@ -42,8 +36,9 @@ public class TmdbService {
     @Value("${external.tmdb.image-base-url}")
     private String imageBaseUrl;
     
-    public TmdbService(WebClient.Builder webClientBuilder, MovieRepository movieRepository) {
-        this.webClient = webClientBuilder.build();
+    @Autowired
+    public TmdbService(WebClient webClient, MovieRepository movieRepository) {
+        this.webClient = webClient;
         this.movieRepository = movieRepository;
     }
     
@@ -194,7 +189,7 @@ public class TmdbService {
                 .collect(Collectors.toList());
     }
     
-    private Optional<MovieDto> convertAndSaveMovie(TmdbDto.MovieResponse tmdbMovie) {
+    private Optional<MovieDto> convertAndSaveMovie(TmdbDto.MovieResult tmdbMovie) {
         try {
             // Check if movie already exists
             Optional<Movie> existingMovie = movieRepository.findByTmdbId(tmdbMovie.getId());
@@ -212,7 +207,7 @@ public class TmdbService {
         }
     }
     
-    private Movie convertTmdbToEntity(TmdbDto.MovieResponse tmdbMovie) {
+    private Movie convertTmdbToEntity(TmdbDto.MovieResult tmdbMovie) {
         LocalDate releaseDate = null;
         if (tmdbMovie.getReleaseDate() != null && !tmdbMovie.getReleaseDate().isEmpty()) {
             try {
@@ -223,9 +218,9 @@ public class TmdbService {
         }
         
         String genresJson = "[]";
-        if (tmdbMovie.getGenres() != null && !tmdbMovie.getGenres().isEmpty()) {
-            genresJson = "[" + tmdbMovie.getGenres().stream()
-                    .map(genre -> "\"" + genre.getName() + "\"")
+        if (tmdbMovie.getGenreIds() != null && !tmdbMovie.getGenreIds().isEmpty()) {
+            genresJson = "[" + tmdbMovie.getGenreIds().stream()
+                    .map(String::valueOf)
                     .collect(Collectors.joining(",")) + "]";
         }
         
@@ -243,7 +238,7 @@ public class TmdbService {
                 .voteCount(tmdbMovie.getVoteCount())
                 .popularity(tmdbMovie.getPopularity())
                 .genres(genresJson)
-                .runtime(tmdbMovie.getRuntime())
+                .runtime(null) // MovieResult doesn't have runtime
                 .adult(tmdbMovie.getAdult())
                 .build();
     }

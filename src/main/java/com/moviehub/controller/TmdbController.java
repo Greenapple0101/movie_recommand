@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tmdb")
+@RequestMapping("/api/tmdb")
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "TMDb Integration", description = "TMDb API 연동 관련 API")

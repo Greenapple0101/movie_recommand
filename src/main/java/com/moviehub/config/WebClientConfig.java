@@ -17,4 +17,9 @@ public class WebClientConfig {
                 .baseUrl(tmdbBaseUrl)
                 .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(1024 * 1024)); // 1MB
     }
+    
+    @Bean
+    public WebClient webClient(WebClient.Builder webClientBuilder) {
+        return webClientBuilder.build();
+    }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/trends")
+@RequestMapping("/api/trends")
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "Trend", description = "트렌드 관련 API")
